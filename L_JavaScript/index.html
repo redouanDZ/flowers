@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أزهار أ - باقات الزهور الاصطناعية</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Add toast notification styles */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+        }
+        
+        .toast-message {
+            background: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .toast-error {
+            background: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-flower1"></i></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#products">المنتجات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">من نحن</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">اتصل بنا</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero" style="background-image: url('https://ik.imagekit.io/rkndkbsiy/flowers-279583_1280.jpg?updatedAt=1754650138911');">
+        <div class="container">
+            <h1 class="display-4">باقات زهور اصطناعية جميلة</h1>
+            <p class="lead">ترتيبات أنيقة تدوم طويلاً لكل المناسبات</p>
+            <a href="#products" class="btn btn-light btn-lg">تسوق الآن</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="container my-5">
+        <h2 class="text-center mb-4">مجموعتنا</h2>
+        <div class="row" id="products-container">
+            <!-- Products will be dynamically loaded here -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="container my-5">
+        <h2 class="text-center mb-4">من نحن</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <p>نتخصص في إنشاء باقات زهور اصطناعية مذهلة تضفي الجمال والأناقة على أي مساحة دون الحاجة لصيانة الزهور الطازجة.</p>
+                <p>صُنّعت ترتيباتنا بعناية باستخدام مواد عالية الجودة تبدو وتشبه إلى حد كبير الشيء الحقيقي.</p>
+            </div>
+            <div class="col-md-6">
+                <div class="video-container">
+                    <video controls>
+                        <source src="https://ik.imagekit.io/rkndkbsiy/sample-video.mp4?updatedAt=1754602141969" type="video/mp4">
+                        متصفحك لا يدعم تشغيل الفيديو.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container my-5">
+        <h2 class="text-center mb-4">اتصل بنا</h2>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <form id="contact-form">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">الاسم</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">البريد الإلكتروني</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">الرسالة</label>
+                        <textarea class="form-control" id="message" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Modal -->
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg order-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">تقديم طلب</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="order-form">
+                        <input type="hidden" id="product-id">
+                        <div class="mb-3">
+                            <label for="product-name" class="form-label">المنتج</label>
+                            <input type="text" class="form-control" id="product-name" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="order-name" class="form-label">الاسم الكامل</label>
+                            <input type="text" class="form-control" id="order-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="order-email" class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="order-email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="order-phone" class="form-label">رقم الهاتف</label>
+                            <input type="tel" class="form-control" id="order-phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="order-address" class="form-label">عنوان التوصيل</label>
+                            <textarea class="form-control" id="order-address" rows="2" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="order-quantity" class="form-label">الكمية</label>
+                            <input type="number" class="form-control" id="order-quantity" min="1" value="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="order-notes" class="form-label">تعليمات خاصة</label>
+                            <textarea class="form-control" id="order-notes" rows="2"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">السعر الإجمالي</label>
+                            <div class="input-group">
+                                <span class="input-group-text">DZD</span>
+                                <input type="text" class="form-control" id="order-total" readonly>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" id="submit-order">تأكيد الطلب</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toast-container" id="toast-container"></div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Folowers</h5>
+                    <p>باقات زهور اصطناعية جميلة لكل المناسبات.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>روابط سريعة</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home" class="text-white">الرئيسية</a></li>
+                        <li><a href="#products" class="text-white">المنتجات</a></li>
+                        <li><a href="#about" class="text-white">من نحن</a></li>
+                        <li><a href="#contact" class="text-white">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>معلومات الاتصال</h5>
+                    <p><i class="bi bi-geo-alt"></i>شارع قدماء المجاهدين، السي الوليد أبو الحسن</p>
+                    <p><i class="bi bi-telephone"></i> (+213) 0669754875</p>
+                    <p><i class="bi bi-envelope"></i> info@aflowers.com</p>
+                </div>
+            </div>
+            <hr class="bg-white">
+            <div class="text-center">
+                <p>جميع الحقوق محفوظة &copy; 2025 .</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Load required libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://unpkg.com/imagekit-javascript/dist/imagekit.min.js"></script>
+
+    <script type="module">
+        // Firebase Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD0xLuJlNiWr9-VvPOSxeYKXdfxzf1OZHM",
+            authDomain: "do-to-list-aa1eb.firebaseapp.com",
+            projectId: "do-to-list-aa1eb",
+            storageBucket: "do-to-list-aa1eb.firebasestorage.app",
+            messagingSenderId: "518478895264",
+            appId: "1:518478895264:web:cbcba241dcd91c3ff651c5",
+            databaseURL: "https://do-to-list-aa1eb-default-rtdb.firebaseio.com"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Initialize ImageKit
+        const imagekit = new ImageKit({
+            publicKey: "public_aF1VLWznWZonCwPUp2VzFSZFFjw=",
+            urlEndpoint: "https://ik.imagekit.io/rkndkbsiy",
+            authenticationEndpoint: ""
+        });
+
+        // Product data
+        const products = [
+            {
+                id: 1,
+                name: "باقة الورود الرومانسية",
+                price: 49.99,
+                description: "ترتيب مذهل من الورود الحمراء الاصطناعية مثالي للمناسبات السنوية.",
+                imagePath: "img01.jpg"
+            },
+            {
+                id: 2,
+                name: "مجموعة زهور التوليب الربيعية",
+                price: 39.99,
+                description: "زهور التوليب الاصطناعية النابضة بالحياة تجلب جمال الربيع إلى أي غرفة.",
+                imagePath: "f-red.jfif"
+            },
+            {
+                id: 3,
+                name: "عرض الأوركيد الأنيق",
+                price: 59.99,
+                description: "أوركيد اصطناعية متطورة تضفي لمسة من الفخامة على أي مساحة.",
+                imagePath: "b-red.jfif"
+            },
+            {
+                id: 4,
+                name: "بهجة عباد الشمس",
+                price: 44.99,
+                description: "زهور عباد الشمس الاصطناعية المبهجة تضيء أي غرفة.",
+                imagePath: "b-red1.jfif"
+            },
+            {
+                id: 5,
+                name: "زنبق الوادي",
+                price: 54.99,
+                description: "زنابق اصطناعية رقيقة مثالية للزفاف والمناسبات الخاصة.",
+                imagePath: "f-rose.jfif"
+            },
+            {
+                id: 6,
+                name: "مزيج استوائي غريب",
+                price: 64.99,
+                description: "مزيج نابض بالحياة من الزهور الاستوائية الاصطناعية لإعلان جريء.",
+                imagePath: "b-rose.jfif"
+            }
+        ];
+
+        // Load products on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+            setupEventListeners();
+            // Initialize EmailJS with your public key
+            emailjs.init("hVBRWV9Xz91lEQBnN");
+        });
+
+        // Load products using ImageKit
+        function loadProducts() {
+            const productsContainer = document.getElementById('products-container');
+            productsContainer.innerHTML = '';
+
+            products.forEach(product => {
+                const imageUrl = imagekit.url({
+                    path: product.imagePath,
+                    transformation: [
+                        { width: 500, height: 400 }
+                    ]
+                });
+
+                const productCard = document.createElement('div');
+                productCard.className = 'col-md-4';
+                productCard.innerHTML = `
+                    <div class="card">
+                        <img src="${imageUrl}" class="card-img-top product-img" alt="${product.name}">
+                        <div class="card-body">
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="card-text">${product.description}</p>
+                            <p class="card-text"><strong>${product.price.toFixed(2)} DZD</strong></p>
+                            <button class="btn btn-primary order-btn" 
+                                data-id="${product.id}" 
+                                data-name="${product.name}" 
+                                data-price="${product.price}">
+                                اطلب الآن
+                            </button>
+                        </div>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+
+            setupOrderButtonListeners();
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Quantity change listener
+            document.getElementById('order-quantity').addEventListener('input', function() {
+                const price = parseFloat(document.getElementById('product-name').value === '' ? 0 : 
+                    products.find(p => p.name === document.getElementById('product-name').value).price);
+                updateOrderTotal(price);
+            });
+
+            // Submit order listener
+            document.getElementById('submit-order').addEventListener('click', async function() {
+                const form = document.getElementById("order-form");
+                
+                // Validate form
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                // Disable submit button to prevent multiple submissions
+                const submitButton = document.getElementById('submit-order');
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> جاري الإرسال...';
+
+                const templateParams = {
+        name: form.querySelector("#order-name").value,
+        email: form.querySelector("#order-email").value, // بريد العميل
+        phone: form.querySelector("#order-phone").value,
+        address: form.querySelector("#order-address").value,
+        product: form.querySelector("#product-name").value,
+        quantity: form.querySelector("#order-quantity").value,
+        total: form.querySelector("#order-total").value,
+        notes: form.querySelector("#order-notes").value
+    };
+
+    try {
+        // إرسال لصاحب الموقع
+        const ownerParams = { 
+            ...templateParams, 
+           
+            email: "rayan022023@gmail.com" ,
+            customer_email: templateParams.email
+        };
+        const ownerResponse = await emailjs.send("service_7mcfxsd", "template_f1mp7yy", ownerParams);
+        console.log("📩 تم إرسال الطلب لصاحب الموقع", ownerResponse);
+
+        // إرسال للعميل
+        const customerResponse = await emailjs.send("service_ufuxw8f", "template_1eq5u6y", templateParams);
+        console.log("📩 تم إرسال رسالة تأكيد للعميل", customerResponse);
+
+        // حفظ في Firebase
+        const ordersRef = ref(db, "orders");
+        const newOrderRef = push(ordersRef);
+        await set(newOrderRef, templateParams);
+        console.log("✅ تم حفظ الطلب في Firebase");
+
+        showToast("تم إرسال الطلب وحفظه بنجاح!");
+
+        form.reset();
+        const modal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
+        modal.hide();
+    } catch (error) {
+        console.error("❌ خطأ في معالجة الطلب:", error);
+        showToast("حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى.", "error");
+    } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'تأكيد الطلب';
+    }
+});
+
+            // Contact form listener
+            document.getElementById('contact-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Disable submit button to prevent multiple submissions
+                const submitButton = e.target.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.innerHTML;
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> جاري الإرسال...';
+                
+                const contact = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    message: document.getElementById('message').value,
+                    timestamp: Date.now()
+                };
+
+                try {
+                    // Send contact form via EmailJS
+                    await emailjs.send("service_7mcfxsd", "template_1eq5u6y", contact);
+                    console.log("📩 تم إرسال رسالة الاتصال");
+                    
+                    // Save to Firebase
+                    const contactsRef = ref(db, 'contacts');
+                    const newContactRef = push(contactsRef);
+                    await set(newContactRef, contact);
+                    
+                    showToast('لقد تم إرسال رسالتك بنجاح!');
+                    document.getElementById('contact-form').reset();
+                } catch (error) {
+                    console.error('خطأ في إرسال نموذج الاتصال: ', error);
+                    
+                    // Provide more detailed error message
+                    let errorMessage = 'حدث خطأ أثناء إرسال رسالتك. يرجى المحاولة مرة أخرى.';
+                    if (error.text) {
+                        errorMessage += ` تفاصيل الخطأ: ${error.text}`;
+                    }
+                    
+                    showToast(errorMessage, "error");
+                } finally {
+                    // Re-enable submit button
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonText;
+                }
+            });
+        }
+
+        // Setup order button listeners
+        function setupOrderButtonListeners() {
+            document.querySelectorAll('.order-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const name = this.getAttribute('data-name');
+                    const price = parseFloat(this.getAttribute('data-price'));
+                    
+                    document.getElementById('product-id').value = id;
+                    document.getElementById('product-name').value = name;
+                    document.getElementById('order-quantity').value = 1;
+                    updateOrderTotal(price);
+                    
+                    const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
+                    orderModal.show();
+                });
+            });
+        }
+
+        // Update order total
+        function updateOrderTotal(price) {
+            const quantity = parseInt(document.getElementById('order-quantity').value) || 0;
+            const total = price * quantity;
+            document.getElementById('order-total').value = total.toFixed(2);
+        }
+
+        // Toast notification function
+        function showToast(message, type = "success") {
+            const container = document.getElementById("toast-container");
+            const toast = document.createElement("div");
+            toast.className = "toast-message" + (type === "error" ? " toast-error" : "");
+            toast.innerText = message;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                toast.style.transform = "translateX(100%)";
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

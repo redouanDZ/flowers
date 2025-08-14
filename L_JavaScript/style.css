@@ -1,0 +1,213 @@
+:root {
+    --primary-color: #e91e63;
+    --secondary-color: #f8bbd0;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    text-align: right;
+    direction: rtl;
+}
+
+/* Navigation Bar RTL Support */
+.navbar {
+    background-color: var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    padding: 0.5rem 1rem;
+}
+
+.navbar-brand {
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.navbar-nav .nav-link {
+    text-align: right;
+}
+
+.navbar-collapse {
+    justify-content: space-between;
+}
+
+.navbar-toggler {
+    margin-left: 0;
+}
+
+@media (min-width: 992px) {
+    .navbar-nav {
+        margin-right: 0; /* Reset margin */
+        margin-left: auto;
+    }
+    
+    .navbar-nav .nav-item {
+        margin-left: 0.5rem;
+        margin-right: 0;
+    }
+}
+
+/* Rest of your CSS remains the same... */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?ixlib=rb-4.0.3');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.card {
+    transition: transform 0.3s;
+    margin-bottom: 20px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,.1);
+    text-align: right;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #c2185b;
+    border-color: #c2185b;
+}
+
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 0;
+    margin-top: 40px;
+    text-align: right;
+}
+
+.product-img {
+    height: 250px;
+    object-fit: cover;
+}
+
+.order-modal .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+    direction: rtl;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* RTL Support */
+.form-control {
+    direction: rtl;
+    text-align: right;
+}
+
+textarea {
+    direction: rtl;
+    text-align: right;
+}
+
+.modal-header .btn-close {
+    margin: 0 -0.5rem -0.5rem auto;
+}
+
+.input-group .input-group-text {
+    border-left: 1px solid #ced4da;
+    border-right: none;
+}
+
+.input-group .form-control {
+    border-left: none;
+    border-right: 1px solid #ced4da;
+}
+
+
+
+.me-auto {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
+
+/* Additional RTL fixes */
+.dropdown-menu {
+    right: 0;
+    left: auto;
+    text-align: right;
+}
+
+.dropdown-item {
+    text-align: right;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        text-align: right;
+        width: 100%;
+    }
+    
+    .navbar-nav .nav-item {
+        width: 100%;
+        text-align: right;
+    }
+}
+
+/* List items alignment */
+ul {
+    padding-right: 0;
+}
+
+li {
+    margin-right: 0;
+    margin-left: auto;
+}
+
+/* Table alignment */
+.table {
+    text-align: right;
+}
+
+.table th,
+.table td {
+    text-align: right;
+}
+/* ستايل الإشعار */
+.toast-container {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1055;
+}
+.toast-message {
+  display: flex;
+  align-items: center;
+  background: #4CAF50;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin-bottom: 10px;
+  animation: slideIn 0.4s ease;
+}
+.toast-error {
+  background: #f44336;
+}
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
