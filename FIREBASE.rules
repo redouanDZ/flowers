@@ -1,0 +1,9 @@
+{
+  "rules": {
+    ".read": true,
+    "media": {
+      ".read": true,
+      ".write": "auth != null"
+    }
+  }
+}
